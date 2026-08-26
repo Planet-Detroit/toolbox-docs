@@ -11,7 +11,7 @@ Publishes the Civic Action Toolbox PRD and roadmap as a single password-protecte
 ```sh
 cd ~/projects/toolbox-docs
 ./build.sh
-git add site && git commit -m "Update docs site" && git push
+git add docs && git commit -m "Update docs site" && git push
 ```
 
 Or just ask Claude: "rebuild and publish the toolbox docs site."
@@ -20,10 +20,10 @@ Or just ask Claude: "rebuild and publish the toolbox docs site."
 
 - `build.sh` — converts `../civic-action-toolbox-app/PRD.md` + `ROADMAP.md` to styled HTML (Toolbox brand), then encrypts it
 - `template/` — page header, divider, and footer HTML around the converted docs
-- `site/` — the encrypted page that GitHub Pages serves (the only content published)
+- `docs/` — the encrypted page that GitHub Pages serves (the only content published)
 - `build/` — plaintext intermediate files, ignored by git so they never reach the public repo
 - `.staticrypt.json` — encryption salt (not secret; it's embedded in the page anyway). Committed so "remember me" keeps working across rebuilds.
 
 ## Changing the password
 
-Edit `.password`, run `./build.sh`, commit and push `site/`.
+Edit `.password`, run `./build.sh`, commit and push `docs/`.

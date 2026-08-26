@@ -15,7 +15,7 @@ cat template/head.html build/prd-fragment.html template/mid.html build/roadmap-f
   | sed "s/BUILD_DATE/$(date '+%B %e, %Y')/" > build/index.html
 
 PASSWORD=$(cat .password)
-npx --yes staticrypt build/index.html -d site \
+npx --yes staticrypt build/index.html -d docs \
   --password "$PASSWORD" \
   --remember 30 \
   --template-title "Toolbox Product Docs" \
@@ -24,4 +24,4 @@ npx --yes staticrypt build/index.html -d site \
   --template-color-secondary "#FFF3DC" \
   --template-button "Unlock"
 
-echo "Encrypted site written to site/index.html"
+echo "Encrypted site written to docs/index.html"
