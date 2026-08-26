@@ -82,6 +82,14 @@ def main(src_path, out_path):
         "**Authors:** Nina Ignaczak (product owner) + Claude (development lead)",
         "**Author:** Nina Ignaczak (product owner), Planet Detroit", "author line")
 
+    # Partner-facing docs state alpha status simply; the internal wavering/pack
+    # logic stays internal.
+    text = replace_once(
+        text,
+        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed.** Bridge uses the existing Michigan pack, so it onboards nearly free. Sahan Journal (Minnesota, Twin Cities) is up in the air but still possible. New Hampshire Public Radio wants to push to the Dec–Jan pilot window, so they are up in the air too. Pack #3 may therefore be Minnesota rather than New Hampshire — decision follows the NHPR and Sahan news. The broader RJI pilot cohort for Dec–Jan stays managed in the pilot testing plan.",
+        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed, with additional newsrooms in conversation.** The broader RJI pilot cohort runs Dec–Jan.",
+        "alpha tester status")
+
     # Belt and braces: nothing from the redacted strategy may survive.
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/"):
