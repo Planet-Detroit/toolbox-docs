@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Toolbox Product Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+  /* Toolbox brand: cobalt / brick / yellow / cream, flat design, no borders or shadows */
+  :root {
+    --cobalt: #1B2FC4;
+    --brick: #C42D18;
+    --yellow: #FFD028;
+    --cream: #FFF3DC;
+    --ink: #4A3B2E;
+    --periwinkle: #A0A1D2;
+    --cream-deep: #F7E6C4;
+    --cream-soft: #FBEED3;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "DM Sans", -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  .masthead {
+    background: var(--cobalt);
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+  }
+  .masthead .eyebrow {
+    color: var(--periwinkle);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  .wordmark {
+    font-family: "Baloo 2", "DM Sans", sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .wordmark .civic { color: var(--cream); }
+  .wordmark .toolbox { color: var(--yellow); }
+  .masthead .sub {
+    color: var(--cream);
+    margin-top: 0.75rem;
+    font-size: 1.05rem;
+  }
+  .docnav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--cream);
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+  }
+  .docnav a {
+    font-family: "Baloo 2", "DM Sans", sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--yellow);
+    border-radius: 999px;
+    padding: 0.45rem 1.4rem;
+  }
+  .docnav a:hover, .docnav a:focus-visible { background: var(--cobalt); color: var(--cream); outline: none; }
+  main { max-width: 50rem; margin: 0 auto; padding: 1.5rem 1.5rem 5rem; }
+  section.doc + section.doc { margin-top: 4rem; }
+  .doc-banner {
+    margin-top: 3rem;
+    text-align: center;
+  }
+  .doc-banner .eyebrow {
+    color: var(--brick);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  h1, h2, h3, h4 {
+    font-family: "Baloo 2", "DM Sans", sans-serif;
+    font-weight: 800;
+    color: var(--cobalt);
+    line-height: 1.2;
+    text-wrap: balance;
+    margin: 2.4em 0 0.6em;
+  }
+  h1 { font-size: 2rem; margin-top: 0.5em; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.2rem; }
+  h4 { font-size: 1.05rem; color: var(--brick); }
+  p, ul, ol { margin-bottom: 1em; }
+  ul, ol { padding-left: 1.4rem; }
+  li { margin-bottom: 0.35em; }
+  a { color: var(--cobalt); }
+  strong { color: #37281B; }
+  hr { border: none; height: 4px; background: var(--yellow); margin: 3rem auto; width: 5rem; border-radius: 2px; }
+  blockquote {
+    background: var(--cream-soft);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25em;
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+  code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.88em;
+    background: var(--cream-deep);
+    border-radius: 4px;
+    padding: 0.1em 0.35em;
+  }
+  pre {
+    background: var(--cream-deep);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin-bottom: 1.25em;
+  }
+  pre code { background: none; padding: 0; }
+  table {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+    font-size: 0.95rem;
+    font-variant-numeric: tabular-nums;
+  }
+  th {
+    font-family: "Baloo 2", "DM Sans", sans-serif;
+    font-weight: 800;
+    color: var(--cobalt);
+    text-align: left;
+    padding: 0.5rem 0.9rem;
+    border-bottom: 3px solid var(--cobalt);
+    white-space: nowrap;
+  }
+  td { padding: 0.55rem 0.9rem; vertical-align: top; }
+  tbody tr:nth-child(even) { background: var(--cream-soft); }
+  input[type="checkbox"] { accent-color: var(--cobalt); margin-right: 0.3em; }
+  footer {
+    background: var(--cobalt);
+    color: var(--periwinkle);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  footer strong { color: var(--cream); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <p class="eyebrow">Internal Product Docs · Planet Detroit</p>
+  <div class="wordmark"><span class="civic">Civic</span> <span class="toolbox">Toolbox</span></div>
+  <p class="sub">Product requirements &amp; development roadmap</p>
+</header>
+<nav class="docnav" aria-label="Documents">
+  <a href="#prd">PRD</a>
+  <a href="#roadmap">Roadmap</a>
+</nav>
+<main>
+<section class="doc" id="prd">
