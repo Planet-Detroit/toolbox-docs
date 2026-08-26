@@ -77,6 +77,10 @@ def main(src_path, out_path):
         text,
         "**Status:** Approved founding document — the working spec\n**Companion:** `ROADMAP.md` (phase-by-phase development plan)",
         "**Status:** Partner edition of the working product spec", "header meta")
+    text = replace_once(
+        text,
+        "**Authors:** Nina Ignaczak (product owner) + Claude (development lead)",
+        "**Author:** Nina Ignaczak (product owner), Planet Detroit", "author line")
 
     # Belt and braces: nothing from the redacted strategy may survive.
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
