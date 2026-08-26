@@ -4,5 +4,38 @@
   <p><strong>Confidential — Planet Detroit internal.</strong> Please don't forward the link or password.</p>
   <p>Rebuilt from PRD.md and ROADMAP.md on BUILD_DATE.</p>
 </footer>
+<script>
+// Build an "On this page" table of contents at the top of each document,
+// linking to every h2/h3 heading (pandoc gives each heading a stable id).
+document.querySelectorAll("section.doc").forEach(function (sec) {
+  var heads = sec.querySelectorAll("h2[id], h3[id]");
+  if (!heads.length) return;
+  var esc = function (s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  };
+  var out = [];
+  var inSub = false;
+  heads.forEach(function (h) {
+    var link = '<a href="#' + h.id + '">' + esc(h.textContent) + "</a>";
+    if (h.tagName === "H2") {
+      if (inSub) { out.push("</ol></li>"); inSub = false; }
+      else if (out.length) { out.push("</li>"); }
+      out.push("<li>" + link);
+    } else if (out.length) {
+      if (!inSub) { out.push("<ol>"); inSub = true; }
+      out.push("<li>" + link + "</li>");
+    }
+  });
+  if (inSub) out.push("</ol></li>");
+  else if (out.length) out.push("</li>");
+  var toc = document.createElement("nav");
+  toc.className = "toc";
+  toc.setAttribute("aria-label", "Contents");
+  toc.innerHTML = '<p class="toc-title">On this page</p><ol>' + out.join("") + "</ol>";
+  var firstH2 = sec.querySelector("h2");
+  if (firstH2) firstH2.parentNode.insertBefore(toc, firstH2);
+  else sec.appendChild(toc);
+});
+</script>
 </body>
 </html>
