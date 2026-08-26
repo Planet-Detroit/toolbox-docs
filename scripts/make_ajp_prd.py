@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+"""Produce the AJP/partner-facing version of the PRD.
+
+Reads the internal PRD.md and removes content that must not reach AJP:
+  - Open questions Q4 (Sahan Journal partnership strategy, incl. AJP-portfolio analysis)
+  - Open questions Q7 (internal license housekeeping)
+  - Internal file paths and call-notes references
+Everything else is left intact. Every removal asserts its target text exists,
+so if the PRD is edited in a way that breaks a redaction, this script STOPS
+with an error instead of silently leaking content.
+
+Usage: make_ajp_prd.py <input PRD.md> <output md>
+"""
+import re
+import sys
+
+
+def cut_between(text, start, end, label):
+    """Remove everything from `start` up to (not including) `end`. Exactly once."""
+    i = text.find(start)
+    if i == -1:
+        sys.exit(f"REDACTION FAILED: start marker not found for {label}: {start[:60]!r}")
+    j = text.find(end, i)
+    if j == -1:
+        sys.exit(f"REDACTION FAILED: end marker not found for {label}: {end[:60]!r}")
+    if text.find(start, i + 1) != -1:
+        sys.exit(f"REDACTION FAILED: start marker not unique for {label}")
+    return text[:i] + text[j:]
+
+
+def replace_once(text, old, new, label):
+    n = text.count(old)
+    if n != 1:
+        sys.exit(f"REDACTION FAILED: expected exactly 1 match for {label}, found {n}: {old[:60]!r}")
+    return text.replace(old, new)
+
+
+def main(src_path, out_path):
+    text = open(src_path, encoding="utf-8").read()
+
+    # The Sahan/AJP partnership strategy must never reach AJP.
+    text = cut_between(text, "**Q4 — Sahan Journal as founding design partner",
+                       "**Q5 — Topic boxes", "Q4 Sahan/AJP strategy")
+    # Internal legal housekeeping, irrelevant to partners.
+    text = cut_between(text, "**Q7 — License posture on public repos.**",
+                       "\n---\n\n## 6. What's out of scope", "Q7 license posture")
+    # Renumber the surviving questions so there is no visible gap.
+    text = replace_once(text, "**Q5 — Topic boxes", "**Q4 — Topic boxes", "renumber Q5")
+    text = replace_once(text, "**Q6 — Custom reader questions", "**Q5 — Custom reader questions", "renumber Q6")
+
+    # Internal call notes and file paths.
+    text = replace_once(
+        text,
+        " (Allan's fuller advice — including the per-newsroom-SQLite storage pattern and the deliberate no-LLM-column-mapping constraint — is in `docs/calls/2026-08-20-muckrock-allan.md`.)",
+        "", "Q1 call-notes reference")
+    text = replace_once(
+        text,
+        "Pricing comes from the operating financial model (`CAB_Financial_Model_Updated.xlsx`).",
+        "Pricing comes from the operating financial model.", "financial model filename")
+    text = replace_once(
+        text,
+        "— source of truth is the splash repo at `/Users/user/projects/civic-action-toolbox` (`styles.css` tokens + `assets/`):",
+        "— source of truth is the splash-site repo's design tokens:", "splash repo local path")
+
+    # Replace the Related documents section (local paths) with a partner-facing note.
+    i = text.find("## 9. Related documents")
+    if i == -1:
+        sys.exit("REDACTION FAILED: Related documents heading not found")
+    text = text[:i] + (
+        "## 9. Related documents\n\n"
+        "The development roadmap, pilot testing plan, and operating financial model "
+        "are companion documents — available from Planet Detroit on request.\n"
+    )
+
+    # Adjust the header meta for the partner edition.
+    text = replace_once(
+        text,
+        "**Status:** Approved founding document — the working spec\n**Companion:** `ROADMAP.md` (phase-by-phase development plan)",
+        "**Status:** Partner edition of the working product spec", "header meta")
+
+    # Belt and braces: nothing from the redacted strategy may survive.
+    for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
+                      "Ownership guardrails", "License posture", "/Users/user/"):
+        if forbidden in text:
+            sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
+
+    open(out_path, "w", encoding="utf-8").write(text)
+    print(f"AJP PRD written to {out_path}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        sys.exit("usage: make_ajp_prd.py <input PRD.md> <output md>")
+    main(sys.argv[1], sys.argv[2])

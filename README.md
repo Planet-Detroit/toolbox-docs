@@ -27,3 +27,7 @@ Or just ask Claude: "rebuild and publish the toolbox docs site."
 ## Changing the password
 
 Edit `.password`, run `./build.sh`, commit and push `docs/`.
+
+## Partner (AJP) edition
+
+A second, separately-passworded page at https://planet-detroit.github.io/toolbox-docs/ajp/ serves a redacted PRD for sharing with AJP and other partners. `scripts/make_ajp_prd.py` removes the internal strategy (old Q4 Sahan/AJP analysis, license housekeeping, local file paths) and STOPS with an error if a PRD edit ever breaks a redaction — it cannot silently leak. Its password is in `.password-ajp` (never committed, different from the internal one). Rebuild with `./build-ajp.sh`; the internal `./build.sh` does not touch it, so rebuild BOTH after PRD edits.

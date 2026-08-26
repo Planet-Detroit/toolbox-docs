@@ -1,3 +1,4 @@
 build/
 .password
 .DS_Store
+.password-ajp
