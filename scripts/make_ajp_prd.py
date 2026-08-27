@@ -136,9 +136,9 @@ def main(src_path, out_path):
         "alpha tester status")
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
     text = replace_once(text,
-                        "(Planet Detroit, Bridge Michigan, and possibly Sahan and NHPR)",
+                        "(Planet Detroit, Bridge Michigan, and possibly Sahan and MinnPost)",
                         "(Planet Detroit, Bridge Michigan, and possibly others)", "deadlines alpha roster")
-    text = replace_once(text, "Any later-joining alpha newsroom (Sahan, NHPR)",
+    text = replace_once(text, "Any later-joining alpha newsroom (Sahan, MinnPost)",
                         "Any later-joining alpha newsroom", "alpha goals roster")
     text = replace_once(text, "Requested P1 (Allan Lasser relationship); ToS/Privacy drafted",
                         "Requested P1; ToS/Privacy drafted", "risk table Allan mention")
