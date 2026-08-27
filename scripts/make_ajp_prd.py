@@ -38,21 +38,20 @@ def replace_once(text, old, new, label):
 def main(src_path, out_path):
     text = open(src_path, encoding="utf-8").read()
 
-    # The Sahan/AJP partnership strategy must never reach AJP.
-    text = cut_between(text, "**Q4 — Sahan Journal as founding design partner",
-                       "**Q5 — Topic boxes", "Q4 Sahan/AJP strategy")
-    # Internal legal housekeeping, irrelevant to partners.
-    text = cut_between(text, "**Q7 — License posture on public repos.**",
-                       "\n---\n\n## 6. What's out of scope", "Q7 license posture")
-    # Renumber the surviving questions so there is no visible gap.
-    text = replace_once(text, "**Q5 — Topic boxes", "**Q4 — Topic boxes", "renumber Q5")
-    text = replace_once(text, "**Q6 — Custom reader questions", "**Q5 — Custom reader questions", "renumber Q6")
-
-    # Internal call notes and file paths.
+    # The entire Open questions section is internal deliberation (incl. the Sahan/AJP
+    # strategy in Q4) — partners get decisions, not open items.
+    text = cut_between(text, "## 5. Open questions",
+                       "## 6. What's out of scope", "open questions section")
+    # Fix the two references that pointed into it.
     text = replace_once(
         text,
-        " (Allan's fuller advice — including the per-newsroom-SQLite storage pattern and the deliberate no-LLM-column-mapping constraint — is in `docs/calls/2026-08-20-muckrock-allan.md`.)",
-        "", "Q1 call-notes reference")
+        "How is deliberately undecided until ~Oct 15 — the candidates and decision criteria are in \"Open questions\" (Q1).",
+        "The method is deliberately open until ~Oct 15, decided with early pilot input.",
+        "free tier Q1 reference")
+    text = replace_once(
+        text,
+        "**OPEN — the Q1 decision (Open questions), due Oct 15**",
+        "**OPEN — due Oct 15**", "tier table Q1 reference")
     # Pricing and revenue targets stay internal; the AJP edition names tiers only.
     text = replace_once(
         text,
@@ -63,8 +62,6 @@ def main(src_path, out_path):
     text = replace_once(text, "#### Pro — $150/month", "#### Pro", "pro tier price")
     text = replace_once(text, "#### Newsroom Partner — $300/month ($200/seat institutional bulk)",
                         "#### Newsroom Partner", "partner tier price")
-    text = replace_once(text, "**Q3 — Institutional cohorts.** The $200/seat bulk tier",
-                        "**Q3 — Institutional cohorts.** The institutional bulk tier", "Q3 seat price")
     text = cut_between(text, "**Business (Year 1, from the financial model):**",
                        "**Mission:**", "business metrics block")
     text = replace_once(
@@ -123,10 +120,7 @@ def main(src_path, out_path):
     text = replace_once(text, "- Stripe metered billing, annual plans, self-serve institutional cohort provisioning",
                         "- Annual plans, self-serve institutional cohort provisioning", "out of scope Stripe")
     # Named people and wavering partners stay internal.
-    text = replace_once(text, "(Allan/MuckRock rec, 2026-08-20 call)", "", "Q1 call attribution")
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
-    text = replace_once(text, "(Sahan's mobile critique, Dustin's", "(a partner newsroom's mobile critique, Dustin's",
-                        "Q2 Sahan mention")
     text = replace_once(text,
                         "(Planet Detroit, Bridge Michigan, and possibly Sahan and NHPR)",
                         "(Planet Detroit, Bridge Michigan, and possibly others)", "deadlines alpha roster")
@@ -139,8 +133,13 @@ def main(src_path, out_path):
     # Only confirmed newsrooms (Planet Detroit, Bridge Michigan) are named for partners.
     text = replace_once(text, "Tiny News Collective member, Now Kalamazoo",
                         "Solo and small independent newsrooms", "persona newsroom examples")
-    text = replace_once(text, "networks like Deep South Today, MTC", "newsroom networks",
-                        "Q3 network names")
+
+    # Renumber the remaining sections so there is no visible gap where Open questions was.
+    for old_h, new_h in (("## 6. What's out of scope", "## 5. What's out of scope"),
+                         ("## 7. Risks", "## 6. Risks"),
+                         ("## 8. How we'll measure success", "## 7. How we'll measure success"),
+                         ("## 9. Related documents", "## 8. Related documents")):
+        text = replace_once(text, old_h, new_h, f"renumber {old_h}")
 
     # Belt and braces: nothing from the redacted strategy may survive.
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
