@@ -116,7 +116,7 @@ def main(src_path, out_path):
     # ---- named people, unconfirmed newsrooms, wavering partners stay internal ----
     text = replace_once(
         text,
-        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed.** We will offer Sahan Journal (Minnesota, Twin Cities) a spot in the alpha (decided with Ashley 8/27), and MinnPost has also expressed interest. The emerging shape: a two-state alpha — Planet Detroit + Bridge Michigan in Michigan, Sahan + MinnPost in Minnesota — complementary tests in two states, which would make the second data pack Minnesota. New Hampshire Public Radio wants to push to the Dec–Jan core/beta window, so they are up in the air. The broader RJI core/beta cohort for Dec–Jan stays managed in the pilot testing plan.",
+        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed.** We will offer Sahan Journal (Minnesota, Twin Cities) a spot in the alpha, and MinnPost has also expressed interest. The emerging shape: a two-state alpha — Planet Detroit + Bridge Michigan in Michigan, Sahan + MinnPost in Minnesota — complementary tests in two states, which would make the second data pack Minnesota. New Hampshire Public Radio wants to push to the Dec–Jan core/beta window, so they are up in the air. The broader RJI core/beta cohort for Dec–Jan stays managed in the pilot testing plan.",
         "**Alpha testers: Planet Detroit and Bridge Michigan confirmed, with additional newsrooms in conversation.** The broader RJI core/beta cohort runs Dec–Jan.",
         "alpha tester status")
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
