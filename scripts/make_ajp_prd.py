@@ -118,12 +118,18 @@ def main(src_path, out_path):
                         "(to be adjusted with partner input)", "pack 2 NHPR mention")
     text = replace_once(text, "Requested P1 (Allan Lasser relationship); ToS/Privacy drafted",
                         "Requested P1; ToS/Privacy drafted", "risk table Allan mention")
+    # Only confirmed newsrooms (Planet Detroit, Bridge Michigan) are named for partners.
+    text = replace_once(text, "Tiny News Collective member, Now Kalamazoo",
+                        "Solo and small independent newsrooms", "persona newsroom examples")
+    text = replace_once(text, "networks like Deep South Today, MTC", "newsroom networks",
+                        "Q3 network names")
 
     # Belt and braces: nothing from the redacted strategy may survive.
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/",
                       "$150/month", "$300/month", "$200/seat", "$33K", "5–8%",
-                      "Sahan", "NHPR", "Daniela", "Allan"):
+                      "Sahan", "NHPR", "Daniela", "Allan",
+                      "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC"):
         if forbidden in text:
             sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
 
