@@ -53,10 +53,20 @@ def main(src_path, out_path):
         text,
         " (Allan's fuller advice — including the per-newsroom-SQLite storage pattern and the deliberate no-LLM-column-mapping constraint — is in `docs/calls/2026-08-20-muckrock-allan.md`.)",
         "", "Q1 call-notes reference")
+    # Pricing and revenue targets stay internal; the AJP edition names tiers only.
     text = replace_once(
         text,
-        "Pricing comes from the operating financial model (`CAB_Financial_Model_Updated.xlsx`).",
-        "Pricing comes from the operating financial model.", "financial model filename")
+        "Pricing comes from the operating financial model (`CAB_Financial_Model_Updated.xlsx`). Year 1 targets: 15 Pro + 5 Partner + 10 institutional seats ≈ $33K earned revenue, alongside the $100K RJI fellowship and foundation support.",
+        "Pricing is set in the operating financial model — details available on request. The build is funded by the $100K RJI fellowship alongside foundation support.",
+        "pricing intro + Year 1 targets")
+    text = replace_once(text, "#### Free — $0", "#### Free", "free tier price")
+    text = replace_once(text, "#### Pro — $150/month", "#### Pro", "pro tier price")
+    text = replace_once(text, "#### Newsroom Partner — $300/month ($200/seat institutional bulk)",
+                        "#### Newsroom Partner", "partner tier price")
+    text = replace_once(text, "**Q3 — Institutional cohorts.** The $200/seat bulk tier",
+                        "**Q3 — Institutional cohorts.** The institutional bulk tier", "Q3 seat price")
+    text = cut_between(text, "**Business (Year 1, from the financial model):**",
+                       "**Mission:**", "business metrics block")
     text = replace_once(
         text,
         "— source of truth is the splash repo at `/Users/user/projects/civic-action-toolbox` (`styles.css` tokens + `assets/`):",
@@ -90,9 +100,30 @@ def main(src_path, out_path):
         "**Alpha testers: Planet Detroit and Bridge Michigan confirmed, with additional newsrooms in conversation.** The broader RJI pilot cohort runs Dec–Jan.",
         "alpha tester status")
 
+    # MuckRock's unannounced billing plans were shared in a private call — not ours to publish.
+    text = cut_between(text,
+                       "**New option to evaluate in January (from the 2026-08-20 MuckRock call):**",
+                       "- Stripe Checkout for signup", "MuckRock billing plans")
+    # Named people and wavering partners stay internal.
+    text = replace_once(text, "(Allan/MuckRock rec, 2026-08-20 call)", "", "Q1 call attribution")
+    text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
+    text = replace_once(text, "(Sahan's mobile critique, Dustin's", "(a partner newsroom's mobile critique, Dustin's",
+                        "Q2 Sahan mention")
+    text = replace_once(text,
+                        "(Planet Detroit, Bridge Michigan, and possibly Sahan and NHPR)",
+                        "(Planet Detroit, Bridge Michigan, and possibly others)", "deadlines alpha roster")
+    text = replace_once(text, "Any later-joining alpha newsroom (Sahan, NHPR)",
+                        "Any later-joining alpha newsroom", "alpha goals roster")
+    text = replace_once(text, "(to be adjusted with NHPR input as that relationship develops)",
+                        "(to be adjusted with partner input)", "pack 2 NHPR mention")
+    text = replace_once(text, "Requested P1 (Allan Lasser relationship); ToS/Privacy drafted",
+                        "Requested P1; ToS/Privacy drafted", "risk table Allan mention")
+
     # Belt and braces: nothing from the redacted strategy may survive.
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
-                      "Ownership guardrails", "License posture", "/Users/user/"):
+                      "Ownership guardrails", "License posture", "/Users/user/",
+                      "$150/month", "$300/month", "$200/seat", "$33K", "5–8%",
+                      "Sahan", "NHPR", "Daniela", "Allan"):
         if forbidden in text:
             sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
 
