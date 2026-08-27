@@ -53,11 +53,6 @@ def main(src_path, out_path):
     # ---- tier boundary: partners get the tiers, not the deliberation ----
     text = cut_between(text, "### The tier boundary — what's decided, what's open, and when it freezes",
                        "---\n\n## 3. Requirements", "tier boundary subsection")
-    text = replace_once(
-        text,
-        "Alpha usage gives the Oct 15 tier-boundary freeze (see \"The tier boundary\" under Who it's for) real evidence to decide on",
-        "Alpha usage gives the Oct 15 free-vs-paid decisions real evidence to decide on",
-        "measure-success tier reference")
 
     # ---- pricing and revenue stay internal ----
     text = replace_once(
@@ -74,8 +69,10 @@ def main(src_path, out_path):
     text = replace_once(text, "#### Pro — $150/month", "#### Pro", "pro tier price")
     text = replace_once(text, "#### Newsroom Partner — $300/month ($200/seat institutional bulk)",
                         "#### Newsroom Partner", "partner tier price")
-    text = cut_between(text, "**Business (Year 1, from the financial model):**",
-                       "**Mission:**", "business metrics block")
+    k = text.find("**Business (Year 1, from the financial model):**")
+    if k == -1:
+        sys.exit("REDACTION FAILED: business metrics block not found")
+    text = text[:k].rstrip() + "\n"
 
     # ---- auth: condense implementation detail to what it means for a newsroom ----
     text = cut_between(text, "MuckRock Accounts (Squarelet, the system behind DocumentCloud)",
@@ -126,8 +123,6 @@ def main(src_path, out_path):
     text = replace_once(text,
                         "(Planet Detroit, Bridge Michigan, and possibly Sahan and MinnPost)",
                         "(Planet Detroit, Bridge Michigan, and possibly others)", "deadlines alpha roster")
-    text = replace_once(text, "Any later-joining alpha newsroom (Sahan, MinnPost)",
-                        "Any later-joining alpha newsroom", "alpha goals roster")
     text = replace_once(text, "Tiny News Collective member, Now Kalamazoo",
                         "Solo and small independent newsrooms", "persona newsroom examples")
 
