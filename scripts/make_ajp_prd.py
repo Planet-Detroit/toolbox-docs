@@ -55,11 +55,6 @@ def main(src_path, out_path):
                        "---\n\n## 3. Requirements", "tier boundary subsection")
     text = replace_once(
         text,
-        "How is deliberately undecided until ~Oct 15 — the candidates and decision criteria are in \"Open questions\" (Q1).",
-        "The method is deliberately open until ~Oct 15, decided with early pilot input.",
-        "free tier Q1 reference")
-    text = replace_once(
-        text,
         "Alpha usage gives the Oct 15 tier-boundary freeze (see \"The tier boundary\" under Who it's for) real evidence to decide on",
         "Alpha usage gives the Oct 15 free-vs-paid decisions real evidence to decide on",
         "measure-success tier reference")
