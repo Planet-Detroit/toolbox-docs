@@ -36,6 +36,10 @@ document.querySelectorAll("section.doc").forEach(function (sec) {
   if (firstH2) firstH2.parentNode.insertBefore(toc, firstH2);
   else sec.appendChild(toc);
 });
+// External links open in a new window so readers keep their place on the unlocked page.
+document.querySelectorAll("main a[href]").forEach(function (a) {
+  if (a.host && a.host !== location.host) { a.target = "_blank"; a.rel = "noopener"; }
+});
 </script>
 </body>
 </html>
