@@ -35,12 +35,12 @@ def main(src_path, out_path):
     # Unconfirmed newsrooms and named people stay internal.
     text = replace_once(
         text,
-        "Alpha onboarding runs through September: Planet Detroit live, Bridge Michigan confirmed, Sahan being offered an alpha spot, MinnPost interested — the emerging shape is a two-state alpha (Planet Detroit + Bridge in Michigan, Sahan + MinnPost in Minnesota); NHPR wants to push to the Dec–Jan core/beta window.",
+        "Alpha onboarding runs through September: Planet Detroit live, Bridge Michigan confirmed, Sahan being offered an alpha spot, MinnPost interested — the emerging shape is a two-state alpha (Planet Detroit + Bridge in Michigan, Sahan + MinnPost in Minnesota); NHPR wants to push to the Dec–Jan beta window.",
         "Alpha onboarding runs through September: Planet Detroit live, Bridge Michigan confirmed, additional newsrooms in conversation.",
         "right-now alpha roster")
     text = replace_once(
         text,
-        "Sahan is being offered an alpha spot and MinnPost has expressed interest (a possible Minnesota pair); NHPR may join the Dec–Jan core/beta instead.",
+        "Sahan is being offered an alpha spot and MinnPost has expressed interest (a possible Minnesota pair); NHPR may join the Dec–Jan beta instead.",
         "Additional newsrooms may join as conversations firm up.",
         "Oct 15 alpha roster")
     text = replace_once(
