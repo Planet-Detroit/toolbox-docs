@@ -106,13 +106,6 @@ def main(src_path, out_path):
     text = replace_once(text, "MuckRock handles sign-in; Stripe handles payments.",
                         "MuckRock handles sign-in.", "architecture summary Stripe")
 
-    # ---- brand-spec and open design detail stay internal ----
-    text = cut_between(text, "- **The app UI follows the Toolbox brand spec**",
-                       "- **The embedded box itself carries no Toolbox branding.**",
-                       "brand spec bullets")
-    text = cut_between(text, "- **Open design item: what \"visually neutral\" means in practice.**",
-                       "\n---\n", "open design item")
-
     # ---- header meta ----
     text = replace_once(
         text,
@@ -135,8 +128,6 @@ def main(src_path, out_path):
                         "(Planet Detroit, Bridge Michigan, and possibly others)", "deadlines alpha roster")
     text = replace_once(text, "Any later-joining alpha newsroom (Sahan, MinnPost)",
                         "Any later-joining alpha newsroom", "alpha goals roster")
-    text = replace_once(text, "Requested P1 (Allan Lasser relationship); ToS/Privacy drafted",
-                        "Requested P1; ToS/Privacy drafted", "risk table Allan mention")
     text = replace_once(text, "Tiny News Collective member, Now Kalamazoo",
                         "Solo and small independent newsrooms", "persona newsroom examples")
 
