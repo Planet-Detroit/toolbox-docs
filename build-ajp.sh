@@ -1,17 +1,16 @@
 #!/bin/bash
-# Builds the AJP/partner-facing page: redacted PRD, separate password, served at /ajp/.
-# Run:  ./build-ajp.sh   then commit & push docs/ to publish.
+# Builds the AJP/partner page: redacted PRD + redacted roadmap, own password, served at /ajp/.
 set -euo pipefail
 cd "$(dirname "$0")"
 APP=../civic-action-toolbox-app
 mkdir -p build/ajp docs/ajp
 
 python3 scripts/make_ajp_prd.py "$APP/PRD.md" build/ajp-prd.md
-pandoc -f gfm -t html5 build/ajp-prd.md -o build/ajp-fragment.html
-{ cat template/head-ajp.html
-  cat build/ajp-fragment.html
-} | sed "s/BUILD_DATE/$(date '+%B %e, %Y')/" > build/ajp/index.html
-cat template/foot-ajp.html | sed "s/BUILD_DATE/$(date '+%B %e, %Y')/" >> build/ajp/index.html
+python3 scripts/make_ajp_roadmap.py "$APP/ROADMAP.md" build/ajp-roadmap.md
+pandoc -f gfm -t html5 build/ajp-prd.md -o build/ajp-prd-fragment.html
+pandoc -f gfm -t html5 build/ajp-roadmap.md -o build/ajp-roadmap-fragment.html
+cat template/head-ajp.html build/ajp-prd-fragment.html template/mid-ajp.html build/ajp-roadmap-fragment.html template/foot-ajp.html \
+  | sed "s/BUILD_DATE/$(date '+%B %e, %Y')/" > build/ajp/index.html
 
 PASSWORD=$(cat .password-ajp)
 npx --yes staticrypt build/ajp/index.html -d docs/ajp \
