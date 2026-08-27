@@ -67,9 +67,14 @@ def main(src_path, out_path):
     # ---- pricing and revenue stay internal ----
     text = replace_once(
         text,
-        "Pricing comes from the operating financial model (`CAB_Financial_Model_Updated.xlsx`). Year 1 targets: 15 Pro + 5 Partner + 10 institutional seats ≈ $33K earned revenue, alongside the $100K RJI fellowship and foundation support.",
-        "Pricing is set in the operating financial model — details available on request. The build is funded by the $100K RJI fellowship alongside foundation support.",
-        "pricing intro + Year 1 targets")
+        "Pricing comes from the operating financial model (`CAB_Financial_Model_Updated.xlsx`). Year 1 targets: 15 Pro + 5 Partner + 10 institutional seats ≈ $33K earned revenue, alongside the $100K RJI fellowship and foundation support.\n\n",
+        "", "pricing intro + Year 1 targets")
+    # Evidence bullets condensed, numbers removed (RJI fellowship figure stays, below).
+    text = replace_once(
+        text,
+        "- Planet Detroit has run this tool in production in Michigan since early 2026. Through late August: **66 reader responses submitted through the boxes' own form, across 20 articles** — many describing specific civic actions in their own words: attending a council meeting to ask for an emergency declaration during the wildfire smoke, writing to Michigan senators, co-hosting a lobby day with 33 organizations.\n- Measured interaction with the boxes (planetdetroit.org GA4, Feb–Aug 2026): readers checked an **\"I did / will do this\" box ~990 times** and **clicked out to officials, meetings, and organizations 265 times**. The top click destinations are the product working as designed: Detroit City Council Zoom meetings, michigan.gov, the Michigan Voter Information Center, and groups like the Sierra Club and the Citizens Utility Board. (GA4 undercounts — ad blockers — so these are floors, and one reason the Toolbox measures first-party.)\n- Each article analysis costs ~$0.03; daily monitoring of all government sources costs under $1/day.",
+        "- Planet Detroit has run this tool in production in Michigan since early 2026. Readers use the boxes and report real actions in their own words — attending a council meeting to ask for an emergency declaration during wildfire smoke, writing to Michigan senators, co-hosting a lobby day with partner organizations. Click-throughs go where the product intends: city council meetings, michigan.gov, the state voter information center, and civic organizations. Every signal is measured first-party, so the same evidence will exist for every newsroom on the platform.\n- Analysis and daily monitoring of government sources cost pennies per article — cheap enough to support a meaningful free tier.",
+        "evidence condensed")
     text = replace_once(text, "#### Free — $0", "#### Free", "free tier price")
     text = replace_once(text, "#### Pro — $150/month", "#### Pro", "pro tier price")
     text = replace_once(text, "#### Newsroom Partner — $300/month ($200/seat institutional bulk)",
@@ -126,7 +131,7 @@ def main(src_path, out_path):
     # ---- named people, unconfirmed newsrooms, wavering partners stay internal ----
     text = replace_once(
         text,
-        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed.** Bridge uses the existing Michigan pack, so onboarding takes almost no extra work. We will offer Sahan Journal (Minnesota, Twin Cities) a spot in the alpha (decided with Ashley 8/27), and MinnPost has also expressed interest. The emerging shape: a two-state alpha — Planet Detroit + Bridge Michigan in Michigan, Sahan + MinnPost in Minnesota — complementary tests in two states, which would make the second data pack Minnesota. New Hampshire Public Radio wants to push to the Dec–Jan pilot window, so they are up in the air. The broader RJI pilot cohort for Dec–Jan stays managed in the pilot testing plan.",
+        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed.** Bridge uses the existing Michigan pack, so onboarding takes almost no extra work. We will offer Sahan Journal (Minnesota, Twin Cities) a spot in the alpha (decided with Ashley 8/27), and MinnPost has also expressed interest. The emerging shape: a two-state alpha — Planet Detroit + Bridge Michigan in Michigan, Sahan + MinnPost in Minnesota — complementary tests in two states, which would make the second data pack Minnesota. New Hampshire Public Radio wants to push to the Dec–Jan core/beta window, so they are up in the air. The broader RJI pilot cohort for Dec–Jan stays managed in the pilot testing plan.",
         "**Alpha testers: Planet Detroit and Bridge Michigan confirmed, with additional newsrooms in conversation.** The broader RJI pilot cohort runs Dec–Jan.",
         "alpha tester status")
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
@@ -135,8 +140,6 @@ def main(src_path, out_path):
                         "(Planet Detroit, Bridge Michigan, and possibly others)", "deadlines alpha roster")
     text = replace_once(text, "Any later-joining alpha newsroom (Sahan, NHPR)",
                         "Any later-joining alpha newsroom", "alpha goals roster")
-    text = replace_once(text, "(to be adjusted with NHPR input as that relationship develops)",
-                        "(to be adjusted with partner input)", "pack 2 NHPR mention")
     text = replace_once(text, "Requested P1 (Allan Lasser relationship); ToS/Privacy drafted",
                         "Requested P1; ToS/Privacy drafted", "risk table Allan mention")
     text = replace_once(text, "Tiny News Collective member, Now Kalamazoo",
@@ -146,12 +149,14 @@ def main(src_path, out_path):
     text = replace_once(text, "## 7. Risks", "## 5. Risks", "renumber Risks")
     text = replace_once(text, "## 8. How we'll measure success", "## 6. How we'll measure success",
                         "renumber measure success")
+    text = replace_once(text, "#8-how-well-measure-success", "#6-how-well-measure-success",
+                        "renumber measure-success link")
 
     # ---- nothing redacted may survive ----
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/",
                       "$150/month", "$300/month", "$200/seat", "$33K", "5–8%",
-                      "Sahan", "NHPR", "MinnPost", "Daniela", "Allan",
+                      "Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Hampshire",
                       "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC",
                       "Stripe", "Open questions", "tier boundary", "Related documents"):
         if forbidden in text:
