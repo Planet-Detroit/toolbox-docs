@@ -61,8 +61,6 @@ def main(src_path, out_path):
         text,
         "| NHPR conversation (Daniela Allee) | Informs pack #2 state choice | They want to push to Dec–Jan | Pack standard ships regardless; adjust after |\n",
         "", "deps NHPR row")
-    text = replace_once(text, "Requested; in progress with Allan", "Requested; in progress",
-                        "deps Allan mention")
 
     # Billing internals.
     text = replace_once(text, "**billing (Stripe) built end-to-end**", "**billing built end-to-end**",

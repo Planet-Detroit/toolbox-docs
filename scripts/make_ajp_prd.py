@@ -80,7 +80,7 @@ def main(src_path, out_path):
     text = replace_once(
         text,
         "### Billing — Stripe, minimal surface",
-        "Newsrooms sign in with their MuckRock account (an OpenID Connect login already used across journalism via DocumentCloud); the newsroom's MuckRock organization becomes its Toolbox account, and organization admins become account admins. Until MuckRock completes our app registration, an email magic-link login fills in. All data access is tenant-scoped server-side, with automated cross-tenant isolation tests in CI.\n\n### Billing — Stripe, minimal surface",
+        "Newsrooms sign in with their MuckRock account (an OpenID Connect login already used across journalism via DocumentCloud); the newsroom's MuckRock organization becomes its Toolbox account, and organization admins become account admins. MuckRock has registered our app; until the integration ships, an email magic-link login fills in. All data access is tenant-scoped server-side, with automated cross-tenant isolation tests in CI.\n\n### Billing — Stripe, minimal surface",
         "auth condensed insert")
 
     # ---- billing internals (incl. MuckRock's unannounced plans) stay internal ----
@@ -116,7 +116,7 @@ def main(src_path, out_path):
     # ---- named people, unconfirmed newsrooms, wavering partners stay internal ----
     text = replace_once(
         text,
-        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed.** Bridge uses the existing Michigan pack, so onboarding takes almost no extra work. We will offer Sahan Journal (Minnesota, Twin Cities) a spot in the alpha (decided with Ashley 8/27), and MinnPost has also expressed interest. The emerging shape: a two-state alpha — Planet Detroit + Bridge Michigan in Michigan, Sahan + MinnPost in Minnesota — complementary tests in two states, which would make the second data pack Minnesota. New Hampshire Public Radio wants to push to the Dec–Jan core/beta window, so they are up in the air. The broader RJI core/beta cohort for Dec–Jan stays managed in the pilot testing plan.",
+        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed.** We will offer Sahan Journal (Minnesota, Twin Cities) a spot in the alpha (decided with Ashley 8/27), and MinnPost has also expressed interest. The emerging shape: a two-state alpha — Planet Detroit + Bridge Michigan in Michigan, Sahan + MinnPost in Minnesota — complementary tests in two states, which would make the second data pack Minnesota. New Hampshire Public Radio wants to push to the Dec–Jan core/beta window, so they are up in the air. The broader RJI core/beta cohort for Dec–Jan stays managed in the pilot testing plan.",
         "**Alpha testers: Planet Detroit and Bridge Michigan confirmed, with additional newsrooms in conversation.** The broader RJI core/beta cohort runs Dec–Jan.",
         "alpha tester status")
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
