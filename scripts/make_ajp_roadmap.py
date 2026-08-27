@@ -68,6 +68,10 @@ def main(src_path, out_path):
     text = replace_once(text, "**billing (Stripe) built end-to-end**", "**billing built end-to-end**",
                         "Jan-Feb Stripe")
 
+    text = replace_once(
+        text,
+        "- \u2b1c Rochester Hills recheck \u00b7 the EJ-towns platform survey (both fit into build lulls).\n",
+        "", "internal side tasks bullet")
     # Internal file paths and internal examples.
     text = replace_once(
         text,
