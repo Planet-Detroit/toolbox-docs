@@ -45,7 +45,7 @@ def main(src_path, out_path):
         "Oct 15 alpha roster")
     text = replace_once(
         text,
-        "pressure-test priorities with Dustin, Ashley, Sahan, Bridge, and (if in) NHPR.",
+        "pressure-test priorities with our editors, Ashley, Sahan, Bridge, and (if in) NHPR.",
         "pressure-test priorities with our editors and alpha partners.",
         "scoping partners")
     text = replace_once(text, "the pack #2 state decision (New Hampshire vs. Minnesota).",
@@ -84,7 +84,7 @@ def main(src_path, out_path):
         "suggest intake internals")
     text = replace_once(
         text,
-        "**Decide the free-tier own-data integration method** (PRD Open questions, Q1) using early pilot conversations.",
+        "**Decide the free-tier own-data integration method** (PRD Open questions, Q1) using early partner conversations.",
         "**Decide the free-tier own-data integration method** using early pilot conversations.",
         "Q1 ref")
 
