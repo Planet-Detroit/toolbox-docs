@@ -100,10 +100,28 @@ def main(src_path, out_path):
         "**Alpha testers: Planet Detroit and Bridge Michigan confirmed, with additional newsrooms in conversation.** The broader RJI pilot cohort runs Dec–Jan.",
         "alpha tester status")
 
-    # MuckRock's unannounced billing plans were shared in a private call — not ours to publish.
-    text = cut_between(text,
-                       "**New option to evaluate in January (from the 2026-08-20 MuckRock call):**",
-                       "- Stripe Checkout for signup", "MuckRock billing plans")
+    # Billing internals (Stripe plumbing + MuckRock's unannounced billing plans from a
+    # private call) are not partner material — the whole subsection goes.
+    text = cut_between(text, "### Billing — Stripe, minimal surface",
+                       "### Embed + measurement", "billing subsection")
+    text = replace_once(
+        text,
+        " *(Stripe billing lands in January — see \"How it's built\" — since nobody pays before the March launch. Feature gating and usage caps are already live and don't depend on Stripe.)*",
+        "", "deadlines Stripe note")
+    text = replace_once(
+        text,
+        " — *Stripe itself deferred to January (no one pays before the March launch; test-mode checkout demo-able by the Dec 3 final beta; live billing well before Mar 4)*",
+        "", "milestone A Stripe note")
+    text = replace_once(
+        text,
+        "- [ ] *(moved to the January billing milestone)* A Stripe checkout provisions a Pro tenant whose gates open, and cancellation closes them — test-mode by Dec 3, live before Mar 4\n",
+        "", "milestone A Stripe criterion")
+    text = replace_once(text, "- Upgrade path: in-app upgrade to Pro via Stripe Checkout",
+                        "- Upgrade path: in-app upgrade to Pro", "milestone B Stripe upgrade")
+    text = replace_once(text, "MuckRock handles sign-in; Stripe handles payments.",
+                        "MuckRock handles sign-in.", "architecture summary Stripe")
+    text = replace_once(text, "- Stripe metered billing, annual plans, self-serve institutional cohort provisioning",
+                        "- Annual plans, self-serve institutional cohort provisioning", "out of scope Stripe")
     # Named people and wavering partners stay internal.
     text = replace_once(text, "(Allan/MuckRock rec, 2026-08-20 call)", "", "Q1 call attribution")
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
@@ -129,7 +147,8 @@ def main(src_path, out_path):
                       "Ownership guardrails", "License posture", "/Users/user/",
                       "$150/month", "$300/month", "$200/seat", "$33K", "5–8%",
                       "Sahan", "NHPR", "Daniela", "Allan",
-                      "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC"):
+                      "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC",
+                      "Stripe"):
         if forbidden in text:
             sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
 
