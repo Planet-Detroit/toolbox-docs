@@ -63,7 +63,7 @@ def main(src_path, out_path):
         "", "deps NHPR row")
 
     # Billing internals.
-    text = replace_once(text, "**billing (Stripe) built end-to-end**", "**billing built end-to-end**",
+    text = replace_once(text, "Billing (Stripe) built and tested end to end", "Billing built and tested end to end",
                         "Jan-Feb Stripe")
 
     text = replace_once(
