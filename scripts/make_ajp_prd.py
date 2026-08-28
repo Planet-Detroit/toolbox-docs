@@ -88,7 +88,7 @@ def main(src_path, out_path):
                        "### Embed + measurement", "billing subsection")
     text = replace_once(
         text,
-        " *(Stripe billing lands in January — see \"How it's built\" — since nobody pays before the March launch. Feature gating and usage caps are already live and don't depend on Stripe.)*",
+        " *(Stripe billing lands in January — see \"Architecture\" — since nobody pays before the March launch. Feature gating and usage caps are already live and don't depend on Stripe.)*",
         "", "deadlines Stripe note")
     text = replace_once(
         text,
