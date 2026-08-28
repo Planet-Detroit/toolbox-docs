@@ -103,6 +103,18 @@ def main(src_path, out_path):
     text = replace_once(text, "MuckRock handles sign-in; Stripe handles payments.",
                         "MuckRock handles sign-in.", "architecture summary Stripe")
 
+    # Internal file paths stay internal (fix: cold readers can't use them).
+    text = replace_once(
+        text,
+        "gets dated rows in `cat-civic-data/scrapers/maintenance.yaml`. A monthly automated check",
+        "gets a dated row in a maintenance calendar. A monthly automated check",
+        "maintenance calendar path")
+    text = replace_once(
+        text,
+        " The full coverage map — what's live, what's missing across Metro Detroit and Michigan, and the build-next priority order — is `cat-civic-data/scrapers/SCRAPER-ROADMAP.md`.",
+        " We keep a full coverage map of what's live and what's missing across Metro Detroit and Michigan, with a build-next priority order.",
+        "coverage map path")
+
     # ---- header meta ----
     text = replace_once(
         text,
@@ -137,7 +149,7 @@ def main(src_path, out_path):
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/",
                       "$150/month", "$300/month", "$200/seat", "$33K", "5–8%",
-                      "Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Hampshire",
+                      "Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Hampshire", "cat-civic-data/",
                       "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC",
                       "Stripe", "Open questions", "tier boundary", "Related documents"):
         if forbidden in text:

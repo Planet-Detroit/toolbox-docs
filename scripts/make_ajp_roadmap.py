@@ -80,8 +80,15 @@ def main(src_path, out_path):
         "**Decide the free-tier own-data integration method** using early pilot conversations.",
         "Q1 ref")
 
+    text = replace_once(text, "| Maintenance calendar | `maintenance.yaml` |",
+                        "| Maintenance calendar | Internal calendar file |", "maintenance file cell")
+    text = replace_once(text, "registered in registry.yaml with health checks",
+                        "registered in our scraper registry with health checks", "registry file ref")
+    text = replace_once(text, "broader beta cohort per the pilot testing plan).",
+                        "broader beta cohort per our RJI testing plan, available on request).", "testing plan ref")
+
     for forbidden in ("Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Stripe", "Hampshire",
-                      "SESSION-LOG", "SCRAPER-ROADMAP", "Kalamazoo", "task #",
+                      "SESSION-LOG", "SCRAPER-ROADMAP", "Kalamazoo", "task #", "maintenance.yaml", "registry.yaml", "cat-civic-data/",
                       "The record", "fddojayfmrslkoddygqj", "/Users/user/"):
         if forbidden in text:
             sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
