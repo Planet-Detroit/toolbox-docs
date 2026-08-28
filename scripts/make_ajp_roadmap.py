@@ -35,19 +35,9 @@ def main(src_path, out_path):
     # Unconfirmed newsrooms and named people stay internal.
     text = replace_once(
         text,
-        "Alpha onboarding runs through September: Planet Detroit live, Bridge Michigan confirmed, Sahan being offered an alpha spot, MinnPost interested — the emerging shape is a two-state alpha (Planet Detroit + Bridge in Michigan, Sahan + MinnPost in Minnesota); NHPR wants to push to the Dec–Jan beta window.",
-        "Alpha onboarding runs through September: Planet Detroit live, Bridge Michigan confirmed, additional newsrooms in conversation.",
-        "right-now alpha roster")
-    text = replace_once(
-        text,
         "Sahan is being offered an alpha spot and MinnPost has expressed interest (a possible Minnesota pair); NHPR may join the Dec–Jan beta instead.",
         "Additional newsrooms may join as conversations firm up.",
         "Oct 15 alpha roster")
-    text = replace_once(
-        text,
-        "pressure-test priorities with our editors, Ashley, Sahan, Bridge, and (if in) NHPR.",
-        "pressure-test priorities with our editors and alpha partners.",
-        "scoping partners")
     text = replace_once(text, "the pack #2 state decision (New Hampshire vs. Minnesota).",
                         "the pack #2 state decision.", "right-now pack state")
     text = replace_once(text, "**Decide the pack #2 state** (New Hampshire vs. Minnesota) — this gates everything below.",
@@ -77,7 +67,7 @@ def main(src_path, out_path):
         "", "internal paths bullet")
     text = replace_once(
         text,
-        " The category map lives in `cat-civic-data/scrapers/SCRAPER-ROADMAP.md` (\"Beyond meetings\").",
+        "  - The working category map lives in `cat-civic-data/scrapers/SCRAPER-ROADMAP.md`.\n",
         "", "category map path")
     text = replace_once(
         text,
