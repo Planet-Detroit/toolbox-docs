@@ -115,6 +115,9 @@ def main(src_path, out_path):
         " We keep a full coverage map of what's live and what's missing across Metro Detroit and Michigan, with a build-next priority order.",
         "coverage map path")
 
+    text = replace_once(text, "keep the revenue; the platform takes a 20% share.",
+                        "keep the revenue, with a platform share.", "sponsorship share pct")
+
     # ---- header meta ----
     text = replace_once(
         text,
@@ -148,7 +151,7 @@ def main(src_path, out_path):
     # ---- nothing redacted may survive ----
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/",
-                      "$150/month", "$300/month", "$200/seat", "$33K", "5–8%",
+                      "$150/month", "$300/month", "$200/seat", "$33K", "5–8%", "20%",
                       "Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Hampshire", "cat-civic-data/",
                       "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC",
                       "Stripe", "Open questions", "tier boundary", "Related documents"):
