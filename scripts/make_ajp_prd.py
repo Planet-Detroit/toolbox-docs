@@ -140,6 +140,14 @@ def main(src_path, out_path):
     text = replace_once(text, "Tiny News Collective member, Now Kalamazoo",
                         "Solo and small independent newsrooms", "persona newsroom examples")
 
+    # Sustainability row: dues floor and prospectus name stay internal.
+    text = replace_once(text, "**Sustainability** — the prospectus tests the product must answer",
+                        "**Sustainability** — can this support itself?", "sustainability row title")
+    text = replace_once(text, "(stretch: commit at or above $1K)", "(stretch: commit to a number)",
+                        "dues floor figure")
+    text = replace_once(text, "read against the prospectus decision rules in April",
+                        "read against our sustainability decision rules in April", "sustainability when cell")
+
     # ---- renumber the surviving sections ----
     text = replace_once(text, "## 7. Risks", "## 5. Risks", "renumber Risks")
     text = replace_once(text, "## 8. How we'll measure success", "## 6. How we'll measure success",
@@ -150,7 +158,7 @@ def main(src_path, out_path):
     # ---- nothing redacted may survive ----
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/",
-                      "$150/month", "$300/month", "$200/seat", "$33K", "5–8%", "20%", "$1,000", "$2,500", "$5,000", "prospectus", "PROSPECTUS",
+                      "$150/month", "$300/month", "$200/seat", "$33K", "5–8%", "20%", "$1,000", "$2,500", "$5,000", "$1K", "prospectus", "PROSPECTUS",
                       "Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Hampshire", "cat-civic-data/",
                       "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC",
                       "Stripe", "Open questions", "tier boundary", "Related documents"):
