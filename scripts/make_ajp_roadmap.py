@@ -87,9 +87,14 @@ def main(src_path, out_path):
     text = replace_once(text, "broader beta cohort per the pilot testing plan).",
                         "broader beta cohort per our RJI testing plan, available on request).", "testing plan ref")
 
+    text = replace_once(text, " (the 2028 support model in the prospectus depends on it)",
+                        " (the support model depends on it)", "AI assistant prospectus ref")
+    text = replace_once(text, "**Beta pilot asks (Dec–Feb, feeding the prospectus tests):**",
+                        "**Beta pilot asks (Dec–Feb):**", "pilot asks prospectus ref")
+
     for forbidden in ("Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Stripe", "Hampshire",
                       "SESSION-LOG", "SCRAPER-ROADMAP", "Kalamazoo", "task #", "maintenance.yaml", "registry.yaml", "cat-civic-data/",
-                      "The record", "fddojayfmrslkoddygqj", "/Users/user/"):
+                      "The record", "fddojayfmrslkoddygqj", "/Users/user/", "prospectus", "PROSPECTUS"):
         if forbidden in text:
             sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
 

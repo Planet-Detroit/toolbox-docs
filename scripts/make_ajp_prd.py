@@ -57,19 +57,18 @@ def main(src_path, out_path):
     # ---- pricing and revenue stay internal ----
     text = replace_once(
         text,
-        "Pricing comes from the operating financial model (`CAB_Financial_Model_Updated.xlsx`). Year 1 targets: 15 Pro + 5 Partner + 10 institutional seats ≈ $33K earned revenue, alongside the $100K RJI fellowship and foundation support.\n\n",
-        "", "pricing intro + Year 1 targets")
+        "Pricing follows the prospectus (`PROSPECTUS.md`): the base is free, and paying members fund the local data layer through annual dues, alongside the $100K RJI fellowship and foundation support.",
+        "The base is free; paying members fund the local data layer through annual dues — details available on request.", "pricing intro")
     # Evidence bullets condensed, numbers removed (RJI fellowship figure stays, below).
     text = replace_once(
         text,
         "- Planet Detroit has run this tool in production in Michigan since early 2026. Through late August: **66 reader responses submitted through the boxes' own form, across 20 articles** — many describing specific civic actions in their own words: attending a council meeting to ask for an emergency declaration during the wildfire smoke, writing to Michigan senators, co-hosting a lobby day with 33 organizations.\n- Measured interaction with the boxes (planetdetroit.org GA4, Feb–Aug 2026): readers checked an **\"I did / will do this\" box ~990 times** and **clicked out to officials, meetings, and organizations 265 times**. The top click destinations are the product working as designed: Detroit City Council Zoom meetings, michigan.gov, the Michigan Voter Information Center, and groups like the Sierra Club and the Citizens Utility Board. (GA4 undercounts — ad blockers — so these are floors, and one reason the Toolbox measures first-party.)\n- Each article analysis costs ~$0.03; daily monitoring of all government sources costs under $1/day.",
         "- Planet Detroit has run this tool in production in Michigan since early 2026. Readers use the boxes and report real actions in their own words — attending a council meeting to ask for an emergency declaration during wildfire smoke, writing to Michigan senators, co-hosting a lobby day with partner organizations. Click-throughs go where the product intends: city council meetings, michigan.gov, the state voter information center, and civic organizations. Every signal is measured first-party, so the same evidence will exist for every newsroom on the platform.\n- Analysis and daily monitoring of government sources cost pennies per article — cheap enough to support a meaningful free tier.",
         "evidence condensed")
-    text = replace_once(text, "#### Free — $0", "#### Free", "free tier price")
-    text = replace_once(text, "#### Pro — $150/month", "#### Pro", "pro tier price")
-    text = replace_once(text, "#### Newsroom Partner — $300/month ($200/seat institutional bulk)",
-                        "#### Newsroom Partner", "partner tier price")
-    k = text.find("**Business (Year 1, from the financial model):**")
+    text = replace_once(text, "#### Free (base) — $0", "#### Free (base)", "free tier price")
+    text = replace_once(text, "#### Member — annual dues by newsroom size ($1,000 / $2,500 / $5,000)",
+                        "#### Member — annual dues by newsroom size", "member tier price")
+    k = text.find("**Business (2027 targets, prospectus base case):**")
     if k == -1:
         sys.exit("REDACTION FAILED: business metrics block not found")
     text = text[:k].rstrip() + "\n"
@@ -96,10 +95,10 @@ def main(src_path, out_path):
         "", "milestone A Stripe note")
     text = replace_once(
         text,
-        "- [ ] *(moved to the January billing milestone)* A Stripe checkout provisions a Pro tenant whose gates open, and cancellation closes them — test-mode by Dec 3, live before Mar 4\n",
+        "- [ ] *(moved to the January billing milestone)* A Stripe checkout provisions a paid-member tenant whose gates open, and cancellation closes them — test-mode by Dec 3, live before Mar 4\n",
         "", "milestone A Stripe criterion")
-    text = replace_once(text, "- Upgrade path: in-app upgrade to Pro via Stripe Checkout",
-                        "- Upgrade path: in-app upgrade to Pro", "milestone B Stripe upgrade")
+    text = replace_once(text, "- Upgrade path: in-app upgrade to paid membership via Stripe Checkout",
+                        "- Upgrade path: in-app upgrade to paid membership", "milestone B Stripe upgrade")
     text = replace_once(text, "MuckRock handles sign-in; Stripe handles payments.",
                         "MuckRock handles sign-in.", "architecture summary Stripe")
 
@@ -151,7 +150,7 @@ def main(src_path, out_path):
     # ---- nothing redacted may survive ----
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/",
-                      "$150/month", "$300/month", "$200/seat", "$33K", "5–8%", "20%",
+                      "$150/month", "$300/month", "$200/seat", "$33K", "5–8%", "20%", "$1,000", "$2,500", "$5,000", "prospectus", "PROSPECTUS",
                       "Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Hampshire", "cat-civic-data/",
                       "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC",
                       "Stripe", "Open questions", "tier boundary", "Related documents"):
