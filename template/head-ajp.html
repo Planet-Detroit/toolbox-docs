@@ -171,6 +171,23 @@
   .toc li { margin-bottom: 0.25em; }
   .toc a { text-decoration: none; font-weight: 500; }
   .toc a:hover, .toc a:focus-visible { text-decoration: underline; }
+  details.sec > summary { list-style: none; cursor: pointer; position: relative; padding-right: 2.25rem; }
+  details.sec > summary::-webkit-details-marker { display: none; }
+  details.sec > summary::after {
+    content: "+"; position: absolute; right: 0.25rem; top: 50%; transform: translateY(-50%);
+    font-family: "Baloo 2", "DM Sans", sans-serif; font-weight: 800; font-size: 1.35rem;
+    color: var(--cobalt); line-height: 1;
+  }
+  details.sec[open] > summary::after { content: "\2212"; }
+  details.sec > summary:hover h2, details.sec > summary:hover h3 { color: var(--cobalt); }
+  details.sec > summary h2, details.sec > summary h3 { display: inline-block; }
+  .expand-controls { display: flex; gap: 0.75rem; margin: 0 0 1.75rem; }
+  .expand-controls button {
+    font: inherit; font-size: 0.85rem; font-weight: 700; color: var(--cobalt);
+    background: var(--cream-soft); border: none; border-radius: 999px;
+    padding: 0.35rem 1.1rem; cursor: pointer;
+  }
+  .expand-controls button:hover, .expand-controls button:focus-visible { text-decoration: underline; }
   footer {
     background: var(--cobalt);
     color: var(--periwinkle);

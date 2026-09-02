@@ -40,6 +40,55 @@ document.querySelectorAll("section.doc").forEach(function (sec) {
 document.querySelectorAll("main a[href]").forEach(function (a) {
   if (a.host && a.host !== location.host) { a.target = "_blank"; a.rel = "noopener"; }
 });
+// Collapsible sections: every h2 (and each h3 inside it) folds shut. Headings
+// keep their pandoc ids, so the TOC and #links still work — navigation
+// auto-expands whatever it points into.
+function foldLevel(container, tag, cls) {
+  var kids = Array.prototype.slice.call(container.children);
+  var body = null;
+  kids.forEach(function (n) {
+    if (n.tagName === tag) {
+      var det = document.createElement("details");
+      det.className = "sec" + cls;
+      var sum = document.createElement("summary");
+      container.insertBefore(det, n);
+      sum.appendChild(n);
+      det.appendChild(sum);
+      body = document.createElement("div");
+      det.appendChild(body);
+    } else if (body) {
+      body.appendChild(n);
+    }
+  });
+}
+document.querySelectorAll("section.doc").forEach(function (sec) {
+  foldLevel(sec, "H2", "");
+  sec.querySelectorAll("details.sec > div").forEach(function (b) { foldLevel(b, "H3", " sub"); });
+  var ctl = document.createElement("div");
+  ctl.className = "expand-controls";
+  ctl.innerHTML = '<button type="button" data-x="1">Expand all</button><button type="button" data-x="0">Collapse all</button>';
+  ctl.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    sec.querySelectorAll("details.sec").forEach(function (d) { d.open = b.dataset.x === "1"; });
+  });
+  var toc = sec.querySelector("nav.toc");
+  if (toc) toc.parentNode.insertBefore(ctl, toc.nextSibling);
+  else sec.insertBefore(ctl, sec.firstChild);
+});
+function openTo(id) {
+  var el = id && document.getElementById(id);
+  if (!el) return;
+  var d = el.closest("details");
+  while (d) { d.open = true; d = d.parentElement ? d.parentElement.closest("details") : null; }
+  el.scrollIntoView();
+}
+window.addEventListener("hashchange", function () { openTo(decodeURIComponent(location.hash.slice(1))); });
+document.addEventListener("click", function (e) {
+  var a = e.target.closest('a[href^="#"]');
+  if (a) setTimeout(function () { openTo(decodeURIComponent(a.getAttribute("href").slice(1))); }, 0);
+});
+if (location.hash) openTo(decodeURIComponent(location.hash.slice(1)));
 </script>
 </body>
 </html>

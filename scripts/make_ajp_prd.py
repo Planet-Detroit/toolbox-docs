@@ -137,6 +137,24 @@ def main(src_path, out_path):
         "**Alpha testers: Planet Detroit and Bridge Michigan confirmed, with additional newsrooms in conversation.** The broader RJI beta cohort runs Dec–Jan.",
         "alpha tester status")
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
+    text = replace_once(
+        text,
+        " *(v3.1 applies the September amendments from Allan's review, approved by Ashley \u2014 see `docs/prd-amendments-2026-09-allan-review.md`)*",
+        "", "v3.1 version note")
+    text = replace_once(text, "**How the data is captured (added Sept 2026, from Allan's review):**",
+                        "**How the data is captured (added Sept 2026):**", "milestone D Allan credit")
+    text = replace_once(text, "\n- *(removed Sept 2026: the free-tier own-data integration method is deferred past launch \u2014 manual local entry, shipped Nov 5, is the through-launch answer; see Open questions Q1)*",
+                        "", "removed-item Q1 pointer")
+    text = replace_once(
+        text,
+        "**two tiers, 6\u20138 newsrooms total** (state-pack tier: newsrooms in MI, MN, and NH if NHPR joins, each with their state pack + up to ~2 template-supported custom local additions; national-only tier: everyone else, the free tier as it really is)",
+        "**two tiers, 6\u20138 newsrooms total** (state-pack tier: newsrooms in states with a State Data Pack, each with their pack + up to ~2 template-supported custom local additions; national-only tier: everyone else, the free tier as it really is)",
+        "deadlines two-tier states")
+    text = replace_once(
+        text,
+        "two tiers: state-pack (MI / MN / NH-if-NHPR) and national-only",
+        "two tiers: state-pack and national-only",
+        "measure-success two-tier states")
     text = replace_once(text,
                         "(Planet Detroit, Bridge Michigan, and possibly Sahan and MinnPost)",
                         "(Planet Detroit, Bridge Michigan, and possibly others)", "deadlines alpha roster")

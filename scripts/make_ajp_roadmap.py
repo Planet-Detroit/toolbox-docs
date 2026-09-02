@@ -38,10 +38,33 @@ def main(src_path, out_path):
         "Sahan is being offered an alpha spot and MinnPost has expressed interest (a possible Minnesota pair); NHPR may join the Dec–Jan beta instead.",
         "Additional newsrooms may join as conversations firm up.",
         "Oct 15 alpha roster")
-    text = replace_once(text, "the pack #2 state decision (New Hampshire vs. Minnesota).",
-                        "the pack #2 state decision.", "right-now pack state")
-    text = replace_once(text, "**Decide the pack #2 state** (New Hampshire vs. Minnesota) — this gates everything below.",
-                        "**Decide the pack #2 state** — this gates everything below.", "phase 5 pack state")
+    text = replace_once(text, "the pack #2 state decision (New Hampshire vs. Minnesota — leaning Minnesota; needs MinnPost + Sahan confirmation) — **decide by Sept 14**",
+                        "the pack #2 state decision — **decide by Sept 14**", "right-now pack state")
+    text = replace_once(text, "(Kat, 8/31)", "(RJI, 8/31)", "Kat name")
+    text = replace_once(text, "(raised by Kat at RJI, 8/31)", "(raised by RJI, 8/31)", "Kat name 2")
+    text = replace_once(text, "confirm with Allan what an org-less sign-in looks like",
+                        "confirm with MuckRock what an org-less sign-in looks like", "Allan sign-in ref")
+    text = replace_once(
+        text,
+        " *(v3.1 applies the approved September amendments \u2014 `docs/prd-amendments-2026-09-allan-review.md`)*",
+        "", "v3.1 version note")
+    text = replace_once(text, "; completed phases live in **The record** at the bottom", "", "how-to record ref")
+    text = replace_once(text,
+                        "*(September is sequenced in the build plan above. The former Phases 4–6 were folded into it on Sept 2 — one plan per time period, nothing tracked twice. Phases 1–3 history lives in \"The record\" at the bottom.)*",
+                        "*(September is sequenced in the build plan above.)*", "from-oct intro")
+    text = replace_once(text,
+                        "Minnesota platform reconnaissance done (a Minnesota pack is template drops, not research).",
+                        "pack #2 platform reconnaissance done (the pack is template drops, not research).", "right-now recon")
+    text = replace_once(text, "· Minnesota platform reconnaissance |",
+                        "· pack #2 platform reconnaissance |", "week1 recon cell")
+    text = replace_once(text, "(no-ops until Nina's 20-minute account setup — `MONITORING.md`)",
+                        "(no-ops until account setup completes)", "monitoring ref 1")
+    text = replace_once(text, "(code live; accounts are Nina's — `MONITORING.md`)",
+                        "(code live; account setup pending)", "monitoring ref 2")
+    text = replace_once(text, "(email-safe HTML, Mailchimp-tested — Bridge's ESP)",
+                        "(email-safe HTML, tested against a partner newsroom's email platform)", "mailchimp ref")
+    text = replace_once(text, " · **Sept 14: pack #2 state decision** (needs MinnPost + Sahan confirmation)",
+                        " · **Sept 14: pack #2 state decision**", "week2 confirmations")
     text = replace_once(
         text,
         "State TBD (New Hampshire vs. Minnesota; a Sahan + MinnPost alpha pair would make it Minnesota).",
@@ -58,27 +81,14 @@ def main(src_path, out_path):
 
     text = replace_once(
         text,
-        "- \u2b1c **Rochester Hills recheck \u00b7 EJ-towns platform survey** (both fit into build lulls).\n",
-        "", "internal side tasks bullet")
+        " **Fits into build lulls:** Rochester Hills recheck \u00b7 EJ-towns platform survey.",
+        "", "internal side tasks")
     # Internal file paths and internal examples.
     text = replace_once(
         text,
         "- The running narrative lives in `docs/SESSION-LOG.md`; scraper coverage and its gaps live in `cat-civic-data/scrapers/SCRAPER-ROADMAP.md`.\n",
         "", "internal paths bullet")
-    text = replace_once(
-        text,
-        "  - The working category map lives in `cat-civic-data/scrapers/SCRAPER-ROADMAP.md`.\n",
-        "", "category map path")
-    text = replace_once(
-        text,
-        "the moment they hit a gap (\"I needed the Kalamazoo planning commission and it wasn't there\"). Suggestions land in a `data_source_suggestions` table, we review them, and they feed the prioritized build list in `SCRAPER-ROADMAP.md`.",
-        "the moment they hit a gap. Suggestions land in a review queue and feed the prioritized build list.",
-        "suggest intake internals")
-    text = replace_once(
-        text,
-        "**Decide the free-tier own-data integration method** (PRD Open questions, Q1) using early partner conversations.",
-        "**Decide the free-tier own-data integration method** using early pilot conversations.",
-        "Q1 ref")
+
 
     text = replace_once(text, "| Maintenance calendar | `maintenance.yaml` |",
                         "| Maintenance calendar | Internal calendar file |", "maintenance file cell")
@@ -92,7 +102,7 @@ def main(src_path, out_path):
     text = replace_once(text, "**Beta pilot asks (Dec–Feb, feeding the prospectus tests):**",
                         "**Beta pilot asks (Dec–Feb):**", "pilot asks prospectus ref")
 
-    for forbidden in ("Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Stripe", "Hampshire",
+    for forbidden in ("Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Stripe", "Hampshire", "Minnesota", "Mailchimp", "MONITORING.md", "Kat,", "Kat at",
                       "SESSION-LOG", "SCRAPER-ROADMAP", "Kalamazoo", "task #", "maintenance.yaml", "registry.yaml", "cat-civic-data/",
                       "The record", "fddojayfmrslkoddygqj", "/Users/user/", "prospectus", "PROSPECTUS"):
         if forbidden in text:
