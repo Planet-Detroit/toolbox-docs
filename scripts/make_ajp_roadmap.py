@@ -57,10 +57,12 @@ def main(src_path, out_path):
                         "pack #2 platform reconnaissance done (the pack is template drops, not research).", "right-now recon")
     text = replace_once(text, "· Minnesota platform reconnaissance |",
                         "· pack #2 platform reconnaissance |", "week1 recon cell")
-    text = replace_once(text, "(no-ops until Nina's 20-minute account setup — `MONITORING.md`)",
-                        "(no-ops until account setup completes)", "monitoring ref 1")
-    text = replace_once(text, "(code live; accounts are Nina's — `MONITORING.md`)",
-                        "(code live; account setup pending)", "monitoring ref 2")
+    text = replace_once(text, "(✅ fully live and verified Sept 3 — Sentry on both services, three green UptimeRobot monitors; `MONITORING.md`)",
+                        "(✅ fully live and verified Sept 3)", "monitoring ref 1")
+    # Internal ops detail (migration ledger repair, deploy tooling rules)
+    # stays internal.
+    text = replace_once(text, " Also Sept 3: the production migration ledger was repaired (an August file-rename had desynced it), so `supabase db push` works normally again — schema changes go through migration files only, never the dashboard SQL editor.",
+                        "", "monitoring ref 2 (internal ops sentence)")
     text = replace_once(text, "(email-safe HTML, Mailchimp-tested — Bridge's ESP)",
                         "(email-safe HTML, tested against a partner newsroom's email platform)", "mailchimp ref")
     text = replace_once(text, " · **Sept 14: pack #2 state decision** (needs MinnPost + Sahan confirmation)",
