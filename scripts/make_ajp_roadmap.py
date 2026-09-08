@@ -63,8 +63,8 @@ def main(src_path, out_path):
     # stays internal.
     text = replace_once(text, " Also Sept 3: the production migration ledger was repaired (an August file-rename had desynced it), so `supabase db push` works normally again — schema changes go through migration files only, never the dashboard SQL editor.",
                         "", "monitoring ref 2 (internal ops sentence)")
-    text = replace_once(text, "(email-safe HTML, Mailchimp-tested — Bridge's ESP)",
-                        "(email-safe HTML, tested against a partner newsroom's email platform)", "mailchimp ref")
+    text = replace_once(text, "(email-safe HTML, Mailchimp-tested — Bridge's ESP; **verified Sept 8** through Mailchimp's preview and a real ActiveCampaign send, rows confirmed)",
+                        "(email-safe HTML, tested against a partner newsroom's email platform; **verified Sept 8** through a real send, rows confirmed)", "mailchimp ref")
     text = replace_once(text, " · **Sept 14: pack #2 state decision** (needs MinnPost + Sahan confirmation)",
                         " · **Sept 14: pack #2 state decision**", "week2 confirmations")
     text = replace_once(
