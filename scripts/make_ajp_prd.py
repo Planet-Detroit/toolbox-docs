@@ -37,6 +37,19 @@ def replace_once(text, old, new, label):
     return text.replace(old, new)
 
 
+def replace_span(text, start, end, new, label):
+    """Replace from a unique start marker through the end marker (inclusive).
+    Used where the internal text carries names that should not live in this
+    public script either."""
+    i = text.find(start)
+    if i == -1 or text.find(start, i + 1) != -1:
+        sys.exit(f"REDACTION FAILED: start marker missing or not unique for {label}: {start[:60]!r}")
+    j = text.find(end, i)
+    if j == -1:
+        sys.exit(f"REDACTION FAILED: end marker not found for {label}: {end[:60]!r}")
+    return text[:i] + new + text[j + len(end):]
+
+
 def main(src_path, out_path):
     text = open(src_path, encoding="utf-8").read()
 
@@ -131,16 +144,20 @@ def main(src_path, out_path):
         "**Author:** Nina Ignaczak (product owner), Planet Detroit", "author line")
 
     # ---- named people, unconfirmed newsrooms, wavering partners stay internal ----
-    text = replace_once(
+    # The third newsroom and its state stay unnamed on the partner page
+    # (Nina can lift this by editing the replacement text).
+    text = replace_span(
         text,
-        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed.** We will offer Sahan Journal (Minnesota, Twin Cities) a spot in the alpha, and MinnPost has also expressed interest. The emerging shape: a two-state alpha — Planet Detroit + Bridge Michigan in Michigan, Sahan + MinnPost in Minnesota — complementary tests in two states, which would make the second data pack Minnesota. New Hampshire Public Radio wants to push to the Dec–Jan beta window, so they are up in the air. The broader RJI beta cohort for Dec–Jan stays managed in the pilot testing plan.",
-        "**Alpha testers: Planet Detroit and Bridge Michigan confirmed, with additional newsrooms in conversation.** The broader RJI beta cohort runs Dec–Jan.",
+        "**Alpha testers: Planet Detroit, Bridge Michigan, and ",
+        "stays managed in the pilot testing plan.",
+        "**Alpha testers: Planet Detroit, Bridge Michigan, and a third newsroom in a second state (confirmed Sept 10, 2026).** A two-state alpha — complementary tests in two states — which makes the second State Data Pack that state's. The broader RJI beta cohort for Dec–Jan stays managed in the pilot testing plan.",
         "alpha tester status")
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
-    text = replace_once(
+    text = replace_span(
         text,
-        " *(v3.1 applies the September amendments from Allan's review, approved by Ashley \u2014 see `docs/prd-amendments-2026-09-allan-review.md`)*",
-        "", "v3.1 version note")
+        " *(v3.2: the standard state pack and the body directory",
+        "see `docs/prd-amendments-2026-09-allan-review.md`)*",
+        "", "version note")
     text = replace_once(text, "**How the data is captured (added Sept 2026, from Allan's review):**",
                         "**How the data is captured (added Sept 2026):**", "milestone D Allan credit")
     text = replace_once(text, "\n- *(removed Sept 2026: the free-tier own-data integration method is deferred past launch \u2014 manual local entry, shipped Nov 5, is the through-launch answer; see Open questions Q1)*",
@@ -156,8 +173,21 @@ def main(src_path, out_path):
         "two tiers: state-pack and national-only",
         "measure-success two-tier states")
     text = replace_once(text,
-                        "(Planet Detroit, Bridge Michigan, and possibly Sahan and MinnPost)",
-                        "(Planet Detroit, Bridge Michigan, and possibly others)", "deadlines alpha roster")
+                        "(Planet Detroit, Bridge Michigan, MinnPost)",
+                        "(Planet Detroit, Bridge Michigan, and a third newsroom)", "deadlines alpha roster")
+    # The standard state pack (Sept 11): internal plan paths and the second
+    # state's name stay internal.
+    text = replace_once(text,
+                        " Build plan and cost ledger for the first instance (Minnesota): `docs/mn-pack/`.",
+                        " The first instance is pack #2, below.", "standard pack plan path")
+    text = replace_span(
+        text,
+        "Read against the standard, Michigan is missing Grand Rapids and Kent County",
+        "alpha opens Oct 1 with the other two newsrooms.",
+        "Read against the standard, Michigan is missing Grand Rapids and Kent County (Layer C) and has no body directory yet (Layer B) — the directory is being backfilled starting with the seven SEMCOG counties.\n\n**Pack #2 — the second state (decided Sept 10, 2026, with the third alpha newsroom confirmed).** The first pack built to the standard, and the first clean measurement of what a state costs — hours by phase and person, dollars per body, every surprise — logged as it happens to produce the underwriter price sheet. Standard collectors live Sept 15–17; the newsroom's account follows once every existing row is tagged with its state; alpha opens Oct 1 with the other two newsrooms.",
+        "pack 2 paragraph")
+    text = replace_once(text, "with the Michigan State Data Pack + pack #2 (Minnesota)",
+                        "with the Michigan State Data Pack + pack #2 (the second state)", "milestone A pack 2")
     text = replace_once(text, "Tiny News Collective member, Now Kalamazoo",
                         "Solo and small independent newsrooms", "persona newsroom examples")
 
@@ -180,7 +210,7 @@ def main(src_path, out_path):
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/",
                       "$150/month", "$300/month", "$200/seat", "$33K", "5–8%", "20%", "$1,000", "$2,500", "$5,000", "$1K", "prospectus", "PROSPECTUS",
-                      "Sahan", "NHPR", "MinnPost", "Daniela", "Allan", "Hampshire", "cat-civic-data/",
+                      "Sahan", "NHPR", "MinnPost", "Minnesota", "Haugen", "Daniela", "Allan", "Hampshire", "cat-civic-data/", "docs/mn-pack", "docs/handoffs",
                       "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC",
                       "Stripe", "Open questions", "tier boundary", "Related documents"):
         if forbidden in text:
