@@ -186,6 +186,8 @@ def main(src_path, out_path):
         "alpha opens Oct 1 with the other two newsrooms.",
         "Read against the standard, Michigan is missing Grand Rapids and Kent County (Layer C) and has no body directory yet (Layer B) — the directory is being backfilled starting with the seven SEMCOG counties.\n\n**Pack #2 — the second state (decided Sept 10, 2026, with the third alpha newsroom confirmed).** The first pack built to the standard, and the first clean measurement of what a state costs — hours by phase and person, dollars per body, every surprise — logged as it happens to produce the underwriter price sheet. Standard collectors live Sept 15–17; the newsroom's account follows once every existing row is tagged with its state; alpha opens Oct 1 with the other two newsrooms.",
         "pack 2 paragraph")
+    text = replace_once(text, "organizations on the same footing as Minnesota since Sept 21, 2026",
+                        "organizations on the same footing as the second state since Sept 21, 2026", "pack 1 organizations footing")
     text = replace_once(text, "with the Michigan State Data Pack + pack #2 (Minnesota)",
                         "with the Michigan State Data Pack + pack #2 (the second state)", "milestone A pack 2")
     text = replace_once(text, "Tiny News Collective member, Now Kalamazoo",

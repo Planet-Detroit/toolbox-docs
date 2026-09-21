@@ -67,6 +67,7 @@ def main(src_path, out_path):
         "sept 15-17 row")
     text = replace_once(text, " First instance and cost measurement: `docs/mn-pack/BUILD-PLAN.md`.",
                         " The first instance is pack #2.", "standard pack plan path")
+    text = replace_once(text, "organizations as in Minnesota since Sept 21", "organizations as in the second state since Sept 21", "pack 1 organizations footing")
     text = replace_once(text, "3. Minnesota standard collectors 7 → 4",
                         "3. Pack #2 standard collectors 7 → 4", "cut list pack 2")
     text = replace_once(text, "(Kat, 8/31)", "(RJI, 8/31)", "Kat name")
