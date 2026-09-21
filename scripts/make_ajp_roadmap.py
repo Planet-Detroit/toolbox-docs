@@ -65,7 +65,7 @@ def main(src_path, out_path):
         "the Legislature schedule)",
         "| **Sept 15–17** | **Pack #2 standard collectors live — hard date** (Layer C: the utility commission, the two largest cities and their counties, the environmental agency's comment periods, the Legislature schedule)",
         "sept 15-17 row")
-    text = replace_once(text, " First instance and cost measurement: `docs/mn-pack/BUILD-PLAN.md`.",
+    text = replace_once(text, " First instance and cost measurement: `docs/state-packs/mn-pack/BUILD-PLAN.md`.",
                         " The first instance is pack #2.", "standard pack plan path")
     text = replace_once(text, "organizations as in Minnesota since Sept 21", "organizations as in the second state since Sept 21", "pack 1 organizations footing")
     text = replace_once(text, "3. Minnesota standard collectors 7 → 4",
@@ -136,7 +136,7 @@ def main(src_path, out_path):
     text = replace_once(text, "**Beta pilot asks (Dec–Feb, feeding the prospectus tests):**",
                         "**Beta pilot asks (Dec–Feb):**", "pilot asks prospectus ref")
 
-    for forbidden in ("Sahan", "NHPR", "MinnPost", "Haugen", "Minneapolis", "docs/mn-pack", "docs/handoffs", "Daniela", "Allan", "Stripe", "Hampshire", "Minnesota", "Mailchimp", "MONITORING.md", "Kat,", "Kat at",
+    for forbidden in ("Sahan", "NHPR", "MinnPost", "Haugen", "Minneapolis", "docs/state-packs", "mn-pack", "docs/handoffs", "Daniela", "Allan", "Stripe", "Hampshire", "Minnesota", "Mailchimp", "MONITORING.md", "Kat,", "Kat at",
                       "SESSION-LOG", "SCRAPER-ROADMAP", "Kalamazoo", "task #", "maintenance.yaml", "registry.yaml", "cat-civic-data/",
                       "The record", "fddojayfmrslkoddygqj", "/Users/user/", "prospectus", "PROSPECTUS"):
         if forbidden in text:

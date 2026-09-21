@@ -178,7 +178,7 @@ def main(src_path, out_path):
     # The standard state pack (Sept 11): internal plan paths and the second
     # state's name stay internal.
     text = replace_once(text,
-                        " Build plan and cost ledger for the first instance (Minnesota): `docs/mn-pack/`.",
+                        " Build plan and cost ledger for the first instance (Minnesota): `docs/state-packs/mn-pack/`.",
                         " The first instance is pack #2, below.", "standard pack plan path")
     text = replace_span(
         text,
@@ -212,7 +212,7 @@ def main(src_path, out_path):
     for forbidden in ("AJP-portfolio", "fork risk", "poster-child", "claimable story",
                       "Ownership guardrails", "License posture", "/Users/user/",
                       "$150/month", "$300/month", "$200/seat", "$33K", "5–8%", "20%", "$1,000", "$2,500", "$5,000", "$1K", "prospectus", "PROSPECTUS",
-                      "Sahan", "NHPR", "MinnPost", "Minnesota", "Haugen", "Daniela", "Allan", "Hampshire", "cat-civic-data/", "docs/mn-pack", "docs/handoffs",
+                      "Sahan", "NHPR", "MinnPost", "Minnesota", "Haugen", "Daniela", "Allan", "Hampshire", "cat-civic-data/", "docs/state-packs", "mn-pack", "docs/handoffs",
                       "Kalamazoo", "Tiny News Collective", "Deep South Today", "MTC",
                       "Stripe", "Open questions", "tier boundary", "Related documents"):
         if forbidden in text:
