@@ -1,0 +1,5 @@
+build/
+.password
+.DS_Store
+.password-partner
+__pycache__/
