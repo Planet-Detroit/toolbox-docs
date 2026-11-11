@@ -132,6 +132,9 @@ def main(src_path, out_path):
 
     text = replace_once(text, " (the 2028 support model in the prospectus depends on it)",
                         " (the support model depends on it)", "AI assistant prospectus ref")
+    # Pilots line (Nov 11, 2026): the organizations being quoted stay internal.
+    text = replace_span(text, "- ⬜ **Pilots: first quotes (", ")**",
+                        "- ⬜ **Pilots: first quotes**", "pilot prospects")
     text = replace_once(text, "**Beta pilot asks (Dec–Feb, feeding the prospectus tests):**",
                         "**Beta pilot asks (Dec–Feb):**", "pilot asks prospectus ref")
 
@@ -140,6 +143,15 @@ def main(src_path, out_path):
                       "The record", "fddojayfmrslkoddygqj", "/Users/user/", "prospectus", "PROSPECTUS"):
         if forbidden in text:
             sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
+    # Any dollar figure stops the build unless it is already on this page.
+    import re
+    allowed = {"$15", "$6"}
+    for m in re.finditer(r"\$\d[\d,.]*[KkMm]?", text):
+        figure = m.group(0).rstrip(".,")
+        if figure not in allowed:
+            sys.exit(f"REDACTION FAILED: a dollar figure not on the allow-list is still present near: {text[max(0, m.start() - 40):m.start()]!r}")
+    if "first quotes (" in text:
+        sys.exit("REDACTION FAILED: pilot prospects still present")
 
     open(out_path, "w", encoding="utf-8").write(text)
     print(f"Partner roadmap written to {out_path}")

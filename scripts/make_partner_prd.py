@@ -68,20 +68,67 @@ def main(src_path, out_path):
                        "---\n\n## 3. Requirements", "tier boundary subsection")
 
     # ---- pricing and revenue stay internal ----
-    text = replace_once(
+    text = replace_span(
         text,
-        "Pricing follows the prospectus (`PROSPECTUS.md`): the base is free, and paying members fund the local data layer through annual dues, alongside the $100K RJI fellowship and foundation support.",
-        "The base is free; paying members fund the local data layer through annual dues — details available on request.", "pricing intro")
+        "Pricing follows the Nov 2026 cost and revenue model",
+        "bring newsrooms in as cohorts.",
+        "The base is free; paying members fund the local data layer through annual dues, and pilots paid by funders or collaboratives open new states and bring newsrooms in as cohorts — details available on request.",
+        "pricing intro")
     # Evidence bullets condensed, numbers removed (RJI fellowship figure stays, below).
     text = replace_once(
         text,
-        "- The box was built because Planet Detroit readers kept asking \"what can we do about this?\" — need first, tool second. It has run in production in Michigan since early 2026. Through late August: **66 reader responses submitted through the boxes' own form, across 20 articles** — many describing specific civic actions in their own words: attending a council meeting to ask for an emergency declaration during the wildfire smoke, writing to Michigan senators, co-hosting a lobby day with 33 organizations.\n- Measured interaction with the boxes (planetdetroit.org GA4, Feb–Aug 2026): readers checked an **\"I did / will do this\" box ~990 times** and **clicked out to officials, meetings, and organizations 265 times**. The top click destinations are the product working as designed: Detroit City Council Zoom meetings, michigan.gov, the Michigan Voter Information Center, and groups like the Sierra Club and the Citizens Utility Board. (GA4 undercounts — ad blockers — so these are floors, and one reason the Toolbox measures first-party.)\n- Each article analysis costs ~$0.03; daily monitoring of all government sources costs under $1/day.",
-        "- The box was built because Planet Detroit readers kept asking \"what can we do about this?\" — need first, tool second. It has run in production in Michigan since early 2026. Readers use the boxes and report real actions in their own words — attending a council meeting to ask for an emergency declaration during wildfire smoke, writing to Michigan senators, co-hosting a lobby day with partner organizations. Click-throughs go where the product intends: city council meetings, michigan.gov, the state voter information center, and civic organizations. Every signal is measured first-party, so the same evidence will exist for every newsroom on the platform.\n- Analysis and daily monitoring of government sources cost pennies per article — cheap enough to support a meaningful free tier.",
+        "- The box was built because Planet Detroit readers kept asking \"what can we do about this?\" — need first, tool second. It has run in production in Michigan since early 2026. Through late August: **66 reader responses submitted through the boxes' own form, across 20 articles** — many describing specific civic actions in their own words: attending a council meeting to ask for an emergency declaration during the wildfire smoke, writing to Michigan senators, co-hosting a lobby day with 33 organizations.\n- Measured interaction with the boxes (planetdetroit.org GA4, Feb–Aug 2026): readers checked an **\"I did / will do this\" box ~990 times** and **clicked out to officials, meetings, and organizations 265 times**. The top click destinations are the product working as designed: Detroit City Council Zoom meetings, michigan.gov, the Michigan Voter Information Center, and groups like the Sierra Club and the Citizens Utility Board. (GA4 undercounts — ad blockers — so these are floors, and one reason the Toolbox measures first-party.)",
+        "- The box was built because Planet Detroit readers kept asking \"what can we do about this?\" — need first, tool second. It has run in production in Michigan since early 2026. Readers use the boxes and report real actions in their own words — attending a council meeting to ask for an emergency declaration during wildfire smoke, writing to Michigan senators, co-hosting a lobby day with partner organizations. Click-throughs go where the product intends: city council meetings, michigan.gov, the state voter information center, and civic organizations. Every signal is measured first-party, so the same evidence will exist for every newsroom on the platform.",
         "evidence condensed")
+    text = replace_span(
+        text,
+        "- After the Oct 17, 2026 cost diet, an analysis costs",
+        "GitHub's free tier.",
+        "- Analysis and daily monitoring of government sources cost pennies per article — cheap enough to support a meaningful free tier.",
+        "analysis cost bullet")
     text = replace_once(text, "#### Free (base) — $0", "#### Free (base)", "free tier price")
-    text = replace_once(text, "#### Member — annual dues by newsroom size ($1,000 / $2,500 / $5,000)",
+    text = replace_span(text, "#### Member — annual dues by newsroom size (", ")",
                         "#### Member — annual dues by newsroom size", "member tier price")
-    k = text.find("**Business (2027 targets, prospectus base case):**")
+    # Business model (Nov 11, 2026): partners get the shape of the offer,
+    # never the prices, costs, margins or hours. Markers are chosen so no
+    # internal figure or prospect name lives in this public script.
+    text = replace_span(
+        text,
+        "Small dues were raised from",
+        "are quoted separately. ",
+        "Dues include **2 local bodies** of the newsroom's choice (a city council, county board or school board from the body directory); further bodies carry an annual per-body price. ",
+        "member dues change and per-body price")
+    text = replace_span(
+        text,
+        "A funder, collaborative or state organization pays for",
+        "per-state underwriter price (§3).",
+        "A funder, collaborative or state organization can pay for a cohort of newsrooms in a state or region to use the Toolbox, with the state pack, for a year — details available on request.",
+        "pilot terms and price")
+    text = replace_span(
+        text,
+        "**Members:** 2 local bodies included with dues, then ",
+        "hard custom sites quoted separately.",
+        "**Members:** 2 local bodies included with dues, then an annual per-body price; hard custom sites quoted separately.",
+        "custom adds per-body price")
+    text = replace_span(text, " Measured cost (Nov 2026):", "at the full staff rate.", "",
+                        "custom adds measured cost")
+    text = replace_span(text, " *(amended Nov 11, 2026: under the old rule", "optional)*", "",
+                        "ladder amendment note")
+    text = replace_span(
+        text,
+        "No local collectors yet. About ",
+        "\n2. **Second paying newsroom",
+        "No local collectors yet.\n2. **Second paying newsroom",
+        "new state cost figures")
+    text = replace_span(text, "A state covers its own upkeep once about", "Staff hours and Decisions tabs.", "",
+                        "new state payback and worked example")
+    text = replace_span(
+        text,
+        "**How pack expansion gets funded — pilots (Nov 11, 2026; replaces",
+        "a year each.",
+        "**How pack expansion gets funded — pilots (Nov 11, 2026).** A funder or collaborative pays for a cohort of newsrooms in a state for a year, and that payment covers the state's pack. Each pack is a shared asset, so the payment benefits every newsroom in that geography.",
+        "pilot funding figures")
+    k = text.find("**Business (2027 targets")
     if k == -1:
         sys.exit("REDACTION FAILED: business metrics block not found")
     text = text[:k].rstrip() + "\n"
@@ -155,7 +202,7 @@ def main(src_path, out_path):
     text = replace_once(text, "e.g., Daniela Allee (NHPR)", "RJI pilot cohort newsrooms", "NHPR editor name")
     text = replace_span(
         text,
-        " *(v3.2: the standard state pack and the body directory",
+        " *(v3.3: business model decisions",
         "see `docs/prd-amendments-2026-09-allan-review.md`)*",
         "", "version note")
     text = replace_once(text, "**How the data is captured (added Sept 2026, from Allan's review):**",
@@ -223,6 +270,19 @@ def main(src_path, out_path):
                       "Stripe", "Open questions", "tier boundary", "Related documents"):
         if forbidden in text:
             sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
+    for forbidden in ("cost model", "cost and revenue model", "CAT_cost_revenue", "Worked example",
+                      "net cost to us", "full staff rate", "left over", "breaks even",
+                      "earned revenue", "Decisions tab", "(testing)"):
+        if forbidden in text:
+            sys.exit(f"REDACTION FAILED: forbidden phrase still present: {forbidden!r}")
+    # Any dollar figure stops the build unless it is one of the few already
+    # public on this page (the fellowship amount and two cost targets).
+    import re
+    allowed = {"$100,000", "$15", "$10"}
+    for m in re.finditer(r"\$\d[\d,.]*[KkMm]?", text):
+        figure = m.group(0).rstrip(".,")
+        if figure not in allowed:
+            sys.exit(f"REDACTION FAILED: a dollar figure not on the allow-list is still present near: {text[max(0, m.start() - 40):m.start()]!r}")
 
     open(out_path, "w", encoding="utf-8").write(text)
     print(f"Partner PRD written to {out_path}")
