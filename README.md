@@ -28,6 +28,7 @@ Or just ask Claude: "rebuild and publish the toolbox docs site."
 
 Edit `.password`, run `./build.sh`, commit and push `docs/`.
 
-## Partner edition
+## Partner edition (removed Nov 11, 2026)
 
-A second, separately-passworded page at https://planet-detroit.github.io/toolbox-docs/partner/ serves a redacted PRD and roadmap for sharing with outside partners. `scripts/make_partner_prd.py` removes the internal strategy (open questions, license housekeeping, local file paths) and STOPS with an error if a PRD edit ever breaks a redaction — it cannot silently leak. Its password is in `.password-partner` (never committed, different from the internal one). Rebuild with `./build-partner.sh`; the internal `./build.sh` does not touch it, so rebuild BOTH after PRD edits.
+There was a second page at `/partner/` with a shortened PRD and roadmap for outside partners. Nina had it deleted on Nov 11, 2026: the page, its build script and its scripts are gone from this repo. Only the internal page is published now. Do not rebuild a partner page unless Nina asks for one.
+
